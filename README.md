@@ -13,3 +13,8 @@ versions accordingly, and use the main branch only if you know what you are doin
 
  - [install](install) A Flux release to your Python environment of choice (ubuntu base)
 
+#### Release
+
+SPDX-License-Identifier: LGPL-3.0
+
+LLNL-CODE-764420
