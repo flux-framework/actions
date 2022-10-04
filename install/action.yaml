@@ -1,0 +1,39 @@
+name: "install flux"
+description: "Install Flux on an ubuntu base"
+inputs:
+  version:
+    description: Version (release) of Flux to install
+    required: true
+    default: 0.43.0
+  install_root:
+    description: Install Flux to this root
+    required: true
+    default: /usr/local
+  sudo:
+    description: Require sudo (defaults to true for native actions)
+    required: true
+    default: true
+
+outputs:
+  version:
+    description: "New version"
+    value: ${{ steps.check.outputs.version }}
+  package:
+    description: "Package with version (to install or test build)"
+    value: ${{ steps.check.outputs.package }}
+  digest:
+    description: "Digest of new release"
+    value: ${{ steps.check.outputs.digest }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Flux
+      id: check
+      env:
+        FLUX_VERSION: ${{ inputs.version }}
+        install_root: ${{ inputs.install_root }}
+        use_sudo: ${{ inputs.sudo }}
+        action_path: ${{ github.action_path }}
+      run: /bin/bash ${action_path}/scripts/install.sh
+      shell: bash

@@ -1,0 +1,15 @@
+name: Test Actions
+on:
+  pull_request: []
+
+jobs:
+  install-flux:
+    name: Install Flux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install Flux
+        uses: ./install
+      - name: Run Flux
+        run: flux start echo "Hello am I working?"
